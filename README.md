@@ -16,4 +16,4 @@
 	deactivate
 
 #In order to download the PIP packages use the following after the project is PULLED from repository: 
-	pip install -r stable-req.txt
+	pip install -r requirements.txt
