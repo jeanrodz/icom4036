@@ -1,2 +1,3 @@
+pyPEG2==2.15.2
 selenium==2.49.2
 yattag==1.5.2
