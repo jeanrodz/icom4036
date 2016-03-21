@@ -17,11 +17,20 @@ class Identifier(str):
 class Expression(str):
     grammar = word
     
+class String(str):
+    grammar = re.compile(r"\"[^\"]+\"")
+
+class BoolLiteral(Symbol):
+     grammar = Enum( K("True"), K("False") )
+     
+class Digit(str):
+     grammar = re.compile(r"\d+")
+    
 class Assignment(str):
-    grammar = attr("type", Type), attr("identifier",Identifier ), ":=" , attr("expression", Expression) , ";"
+    grammar = attr("type", Type), attr("identifier",Identifier ), ":=" , attr("expression", String) , ";"
     
     
-stringToParse = "String myFirstVariable:=  hello ;"
+stringToParse = "String myFirstVariable:=  \"escaped quote\" ;"
 f = parse(stringToParse, Assignment)
 
 print(f.type)
