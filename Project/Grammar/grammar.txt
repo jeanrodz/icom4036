@@ -1,0 +1,50 @@
+Here we define the basic building blocks of the iziTag language by defining the grammar in EBNF.
+
+There are 4 main building blocks:
+
+<statement>
+<identifier>
+<expression>
+<binary_expression>
+
+We will discuss each elements that compose these building blocks:
+
+
+//Defining whitespace
+<WS> := [ \t\r\n]+ NOTE: Recall + means 1 or more
+
+//Defining how an identifier will be composed of 
+<identifier> := <char> <identifier_rest*>;  NOTE: Recall * means 0 or more
+<identifier_rest> := <char> | <digit>;
+<char> := [a-z | A-Z]+;    
+<digit> := [0-9]+;
+
+//Defining the DataTypes
+<datatype> := <int> | <bool> | <string>;
+<int> := <digit>+;
+<bool>:= 'true' | 'false';
+<string> := "<string_elem>*;
+<string_elem> := [a-z | A-Z] - "; NOTE: this mean any other chracter except(-)   "
+
+//Defining what an expression can be composed of 
+
+<factor> := <identifier> | <digit> | <bool> | <function_call> ;
+<term> := <term> '*' <factor> | <term> '/' <factor> | <factor< ;
+<sumexpression> := <sumexpression '+' term | <sumexpression '-' <term> | <term>;
+<expression> := <string> | <int> | <bool> | <identfier> | <binary_expression>;
+<binary_operand> := + | - | * | / | <= | < | >= | > | == | != ;
+<binary_expression> := <expression> <binary_operand> <expression>;
+
+//Defining what an assignment statement can be:
+<assignStatement> := <datatype> <identifier> '=' <sumexpression> | <expression>';'
+
+//Functions, if statements, else statements, loops, izitagMethods
+
+
+
+  
+
+
+
+
+

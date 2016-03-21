@@ -35,7 +35,7 @@ def tokenize(code):
             column = mo.start() - line_start
             yield Token(kind, value, line_num, column)
 
-statements = "IF quantity THENtotal := total + price * quantity;tax := price * 0.05;ENDIF; hola jose this is gargabe  "
+statements = "IF quantity THEN total := total + price * quantity;tax := price * 0.05;ENDIF; hola jose this is gargabe  "
 
 for token in tokenize(statements):
     print(token)
