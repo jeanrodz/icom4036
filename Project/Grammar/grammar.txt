@@ -29,7 +29,7 @@ We will discuss each elements that compose these building blocks:
 //Defining what an expression can be composed of 
 
 <factor> := <identifier> | <digit> | <bool> | <function_call> ;
-<term> := <term> '*' <factor> | <term> '/' <factor> | <factor< ;
+<term> := <term> '*' <factor> | <term> '/' <factor> | <factor> ;
 <sumexpression> := <sumexpression '+' term | <sumexpression '-' <term> | <term>;
 <expression> := <string> | <int> | <bool> | <identfier> | <binary_expression>;
 <binary_operand> := + | - | * | / | <= | < | >= | > | == | != ;
@@ -39,10 +39,30 @@ We will discuss each elements that compose these building blocks:
 <assignStatement> := <datatype> <identifier> '=' <sumexpression> | <expression>';'
 
 //Functions, if statements, else statements, loops, izitagMethods
+//Falta un datastructure que seria la Lista y loop is very important
+//If and else statement
+//evaluar expression
+//print function is very important
+//String datatype con operations no podemos for example mutlipy two strings
+
+//Tasks averiguar en Pypeg
+// Check how we can read from a file using pypeg parse() and pass 
+// Definir por lo menos el assignment de una variable y obtener su valor con estas regalas definidas en grammar.txt
+//Print function para ver el resultado de la variable y todo esto sigue el iziTag grammar
+//Hay cmo distinguir que source code file de iziTag tiene que empezar con izitag{ }
+//****IMPORTANT****
+Basic task: leer un file que tenga grammatica de izitag pero que simplemente checks que el file empezo con 
+este statement izitag{                          }
+
+I only want to see how can we pass a text file to the parse() method of pypeg and just read the
+following criteria:  izitag { } and validate by not having syntax error
+
+class MainIzitag(str):
+    grammar = "izitag","{", maybe_some(word) , "}"
+    
 
 
 
-  
 
 
 
