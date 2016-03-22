@@ -13,9 +13,6 @@ class Type(Keyword):
 
 class Identifier(str):
     grammar = re.compile(r"[^\d\W]\w*")
-
-class Expression(str):
-    grammar = word
     
 class String(str):
     grammar = re.compile(r"\"[^\"]+\"")
@@ -25,14 +22,41 @@ class BoolLiteral(Symbol):
      
 class Digit(str):
      grammar = re.compile(r"\d+")
+     
+class ArithmeticOperands(str):
+    grammar = re.compile(r"[\(\)\+\-\*\/]")
     
+class ParenthesesMatch(str):
+    grammar =re.compile(r"([\(\)])")
+    
+class LogicOperands(Symbol):
+    grammar = Enum( K("OR"), K("AND") , K("NOT") )
+    
+class ComparatorOperands(Symbol):
+    grammar =Enum(K(">"),K("<"),K(">="),K("<="),K("!="),K("==="))
+    
+class Print(str):
+    grammar = "print","(",[word,Digit,String,BoolLiteral,Identifier],")",";"
+    
+class ArithmeticBinaryOperation(str):
+        grammar = [ParenthesesMatch,'' ],[Digit,Identifier], [ArithmeticOperands] , [Digit,Identifier],[ParenthesesMatch,'']
+
 class Assignment(str):
     grammar = attr("type", Type), attr("identifier",Identifier ), ":=" , attr("expression", String) , ";"
     
-    
+
+stringToParse = "(5  + 5 )"
+f = parse(stringToParse,ArithmeticBinaryOperation)
+print(f)
+
+
+"""    
 stringToParse = "String myFirstVariable:=  \"escaped quote\" ;"
 f = parse(stringToParse, Assignment)
 
 print(f.type)
 print(f.identifier)
 print(f.expression)
+"""
+
+
