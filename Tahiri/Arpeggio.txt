@@ -1,0 +1,24 @@
+Arpeggio is a recursive descent parser with backtracking and memorization. Arpeggio grammars are based on PEG formalism. 
+
+Features:
+
+Using Parsing Expression Grammar (PEG) - unambiguous grammars, unlimited lookahead, linear time…
+Works as grammar interpreter - no code is generated
+Multiple syntaxes for grammar definition (Python, peg, clean peg, make your own)
+Case sensitive/insensitive parsing
+Whitespace handling control
+Keyword handling
+Support for comments
+Newline termination for Repetition (available only in Python syntax)
+Parse tree navigation
+Visitors for semantic analysis
+Extensive error reporting
+Good support for debugging and visualisation
+Good test coverage
+Beautiful mkdocs documentation 
+
+
+User Guides + Tutorials!! (follow link)
+
+http://igordejanovic.net/Arpeggio/
+
