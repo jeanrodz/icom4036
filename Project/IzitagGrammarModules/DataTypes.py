@@ -8,9 +8,9 @@ Module Description: Here we define how a datatype looks like in izitag
 """
 
 class StringLiteral(str):
-     quoted_string = re.compile(r'"[^"]*"')
-     grammar = [word, quoted_string]
+     grammar = "'",word,"'"
     
+     
      
 class IntLiteral(str):
      grammar = re.compile(r"\d+")
@@ -31,13 +31,10 @@ stringToParse = "1.0"
 f = parse(stringToParse, FloatLiteral)
 print(f)
 
-stringToParse = " ThisIsASingleString "
+stringToParse = " 'ThisIsASingleString' "
 f = parse(stringToParse, StringLiteral)
 print(f)
 
-stringToParse = " \"ThisIsAEncapsulatedString\" "
-f = parse(stringToParse, StringLiteral)
-print(f)
 
 stringToParse = " int  "
 f = parse(stringToParse, DataType)
