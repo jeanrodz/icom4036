@@ -17,7 +17,7 @@ class ReservedKeywords(Keyword):
     
 """Reserved Keywords of iziTag so far """
 class DataType(Keyword):
-    grammar = Enum( K("int"), K("bool") , K("String"))
+    grammar = Enum( K("int"), K("float") , K("String"))
     
 
 """
@@ -43,19 +43,19 @@ Example of a Literal in IziTag:
 1
 433.909
 """
+"""
 class Literal(str):
     grammar= re.compile(r'(\d+(.\d+)?)')
-    
-class BoolLiteral(Symbol):
-  grammar = Enum( K("True"), K("False") )
-
+"""
 class StringLiteral(str):
      quoted_string = re.compile(r'"[^"]*"')
      grammar = [word, quoted_string]
      
-class Int:
+class IntLiteral(str):
      grammar = re.compile(r"\d+")
     
+class FloatLiteral(str):
+    grammar= re.compile(r'(\d+(.\d+)?)')
     
     
 """
