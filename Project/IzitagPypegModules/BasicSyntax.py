@@ -8,7 +8,7 @@ An assignment has the following characteristics:
 
 Defining what an assignment statement can be in EBNF:
 
-<assignStatement> := <datatype> <identifier> '=' <expression>';'
+<assignStatement> := <datatype> <identifier> ':=' <expression>';'
 """
 
 """
@@ -94,7 +94,7 @@ class Assignment(str):
     grammar = attr("type", DataType), attr("identifier",Identifier ), ":=" , attr("expression", Expression) , ";"
     
 
-stringToParse = " int  foo   :=   5 ;"
+stringToParse = " int foo   :=   5 ;"
 f = parse(stringToParse,Assignment)
 print(f.type)
 print(f.identifier)
