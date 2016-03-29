@@ -1,0 +1,23 @@
+iziTag grammar:
+
+izitag {
+	string text := “testing”
+	zTitle(“hola”)
+
+	int parId_1 := 1
+	string parText := “hello”
+
+	zPar(parId_1, parText)
+	zPar.setBold(parId1)
+
+	string imgSrc_1 := “http://random.photo.com/sup”
+	int imgId_1 := 1
+	zImage(imgId_1, imageSrc_1)
+
+	
+	zImage.setWidth(int id, int/float width)
+	zImage.setHeight(int id, int/float height) 
+	zImage.setPosition(int id, int/float position)
+
+
+}
