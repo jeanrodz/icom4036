@@ -12,12 +12,12 @@ Module Description: Here we define how a function looks like in izitag
 """
 
 class Function(str):
-    grammar = attr("functionName",Identifier),"(",attr("parms",Parameters),")",";"
+    grammar = Identifier,"(",Parameters,")",";"
     
 string = "iziTag( foo, 7, 9.8,'');"
 
 f = parse(string,Function)
 
-print(f.functionName)
-print(f.parms)
+print(f)
+
 

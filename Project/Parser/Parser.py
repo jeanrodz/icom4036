@@ -64,6 +64,6 @@ print(f.parms["a"].typing)
 print(f.parms["b"].typing)
 print(f[0])
 print(f[1])
-print(compose(f))
+print(len(f))
 
 

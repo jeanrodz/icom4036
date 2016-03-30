@@ -20,4 +20,4 @@ class Comment(str):
 
 stringToParse = " // Hello this is a comment in iziTag "
 f = parse(stringToParse, Comment)
-print(f)
+#print(f)

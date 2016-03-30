@@ -8,10 +8,10 @@ Module Description: Here we define how a datatype looks like in izitag
 """
 
 class StringLiteral(str):
-     grammar = "'",word,"'"
+     fulltString = "'",word,"'"
+     emptyString = "''"
+     grammar = [emptyString,fulltString]
     
-     
-     
 class IntLiteral(str):
      grammar = re.compile(r"\d+")
      
@@ -22,7 +22,12 @@ class FloatLiteral(str):
 class DataType(Keyword):
     grammar = Enum( K("int"), K("float") , K("String"))
     
+class Type(str):
+    grammar = DataType
     
+
+    
+"""
 stringToParse = " 99 "
 f = parse(stringToParse, IntLiteral)
 print(f)
@@ -47,4 +52,4 @@ print(f)
 stringToParse = " String  "
 f = parse(stringToParse, DataType)
 print(f)
-
+"""

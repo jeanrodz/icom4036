@@ -14,11 +14,9 @@ class Expression(str):
     grammar = [FloatLiteral,IntLiteral,StringLiteral]
 
 class Assignment(str):
-    grammar = attr("AssignmentType", DataType), attr("AssignmentIdentifier",Identifier ), ":=" , attr("AssignmentExpression", Expression) , ";"
+    grammar =  Type,Identifier , ":=" , Expression , ";"
   
 stringToParse = "float foo := 0.1 ;" 
 
 f = parse(stringToParse, Assignment)
-print(f.AssignmentType)
-print(f.AssignmentIdentifier)
-print(f.AssignmentExpression)
+print(f)
