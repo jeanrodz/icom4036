@@ -17,7 +17,6 @@ class Function(str):
 string = "iziTag( foo, 7, 9.8,'');"
 
 f = parse(string,Function)
-
 print(f)
 
 
