@@ -5,26 +5,18 @@ from Identifier import *
 from Assignment import *
 
 
-"""
-/*****************************************************
-Module Description: Here we define how a parameter looks like in izitag
-/*****************************************************
-"""
-
-
-""""
-NOTE HAY CONFLICT EN RECONOCER UN IDENTIFIER Y UN STRING COMO EXPRESSION
-"""
-class Parameter:
-    grammar = [attr("paramIdentifier", Identifier), attr("paramExpression", Expression)]
+class Parameter(str):
+    grammar =  [FloatLiteral,IntLiteral,StringLiteral,Identifier]
     
-class Parameters(Namespace):
-    grammar = optional(csl(Parameter))
     
-strings = " 'jose' "
-
-f = parse(strings,Parameter)
-print(f.paramExpression)
-
-
+class Parameters(List):
+   grammar = optional(csl(Parameter))
     
+test = "6.7,88,'IamAString',IamAIdentifier"
+f = parse(test,Parameters)
+
+print(f[0])
+print(f[1])
+print(f[2])
+print(f[3])
+print(len(f)) 
