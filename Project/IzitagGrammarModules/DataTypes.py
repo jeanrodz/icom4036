@@ -19,11 +19,15 @@ class IntLiteral(str):
 class FloatLiteral(str):
     grammar= re.compile(r'(\d+(.\d+)?)')
     
+class ArrayLiteral(str):
+    grammar = re.compile("\[(\'(\w+)'(?:,\'(\w+)')*)\]")
+    
 class DataType(Keyword):
-    grammar = Enum( K("int"), K("float") , K("String"))
+    grammar = Enum( K("int"), K("float") , K("String"),K("array"))
     
 class Type(str):
     grammar = DataType
+    
     
 
     
