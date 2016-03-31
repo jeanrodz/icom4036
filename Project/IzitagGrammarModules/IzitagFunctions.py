@@ -9,18 +9,31 @@ Module Description: Here we define how a datatype looks like in izitag
 /*****************************************************
 """
 class IziTagFunctionKeywords(Keyword):
-    grammar = Enum( K("iziTitle"))
+    grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"))
     
 class IziTagFunctionName(str):
     grammar = IziTagFunctionKeywords
-    
-class TextParameter(str):
-    grammar =  optional(StringLiteral)
-    
+            
 class IziTitle(str):
-    grammar = IziTagFunctionName,"(",TextParameter,")",";"
+    grammar = IziTagFunctionName,"(",[Identifier,StringLiteral],")",";"
 
-string = "iziTitle('jose');"
+class IziSection(str):
+    grammar = IziTagFunctionName,"(",")",";"
+    
+class IziHeader(str):
+    grammar = IziTagFunctionName,"(",StringLiteral,")",";"
 
-f = parse(string,IziTitle)
-print(f)
+class IziTable(str):
+    grammar = IziTagFunctionName,"(",IntLiteral,",",IntLiteral,"," , IntLiteral , ")",";"
+
+class IziImage(str):
+    grammar = IziTagFunctionName,"(",IntLiteral,",",StringLiteral,")",";"
+    
+string = "iziImage(5,'foo');"
+
+f = parse(string,IziImage)
+
+    
+
+
+
