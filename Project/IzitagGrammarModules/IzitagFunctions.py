@@ -9,10 +9,16 @@ Module Description: Here we define how a datatype looks like in izitag
 /*****************************************************
 """
 class IziTagFunctionKeywords(Keyword):
-    grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"))
+    grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"),K("iziList"))
+
+class ListKeywords(Keyword):
+    grammar = Enum(K("ordered"),K("unordered"))
     
 class IziTagFunctionName(str):
     grammar = IziTagFunctionKeywords
+    
+class IziTagListOrder(str):
+    grammar = ListKeywords
             
 class IziTitle(str):
     grammar = IziTagFunctionName,"(",[Identifier,StringLiteral],")",";"
@@ -29,10 +35,14 @@ class IziTable(str):
 class IziImage(str):
     grammar = IziTagFunctionName,"(",IntLiteral,",",StringLiteral,")",";"
     
-string = "iziImage(5,'foo');"
+class IziList(str):
+    grammar = IziTagFunctionName,"(",IntLiteral,",",IziTagListOrder,",",Identifier,")",";"
+    
+string = "iziList(5,ordered,foo);"
 
-f = parse(string,IziImage)
+f = parse(string,IziList)
 
+print(f)
     
 
 

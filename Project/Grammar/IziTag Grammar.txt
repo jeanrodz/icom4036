@@ -14,7 +14,7 @@ izitag {
 	int listID := 1;
 	array list_1 := [1, 2, 3];
 	iziHeader('Awesome List');
-	iziList(listID, ordered/unordered, item0, item1, item2, ..., list_1);
+	iziList(listID, ordered/unordered,list_1);
 	
 	iziSection();
 	int tableID := 1;
