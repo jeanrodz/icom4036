@@ -17,7 +17,3 @@ example of invalid identifier: 7&fooIsCool
 class Identifier(str):
     grammar = re.compile(r"[^\d\W]\w*")
     
-
-stringToParse = " __Foo_is_A_Cool_Identifier__lol_ "
-f = parse(stringToParse, Identifier)
-print(f)

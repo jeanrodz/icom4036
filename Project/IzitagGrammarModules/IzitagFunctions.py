@@ -22,6 +22,9 @@ class IziTagListOrder(str):
             
 class IziTitle(str):
     grammar = IziTagFunctionName,"(",[Identifier,StringLiteral],")",";"
+    
+class IziPar(str):
+    grammar = IziTagFunctionName,"(",[Identifier,IntLiteral],",",[StringLiteral,Identifier], ")",";"
 
 class IziSection(str):
     grammar = IziTagFunctionName,"(",")",";"
@@ -38,11 +41,11 @@ class IziImage(str):
 class IziList(str):
     grammar = IziTagFunctionName,"(",IntLiteral,",",IziTagListOrder,",",Identifier,")",";"
     
-string = "iziList(5,ordered,foo);"
+class IziTagFunctions(str):
+    grammar =[IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]
+    
 
-f = parse(string,IziList)
 
-print(f)
     
 
 

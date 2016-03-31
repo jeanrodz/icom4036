@@ -12,13 +12,3 @@ class Parameter(str):
 class Parameters(str):
    grammar = optional(csl(Parameter))
     
-test = "6.7,88,'IamAString',IamAIdentifier"
-f = parse(test,Parameters)
-print(f)
-"""
-print(f[0])
-print(f[1])
-print(f[2])
-print(f[3])
-print(len(f)) 
-"""

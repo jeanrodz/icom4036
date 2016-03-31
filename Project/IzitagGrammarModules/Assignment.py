@@ -20,7 +20,4 @@ class ArrayExpression(str):
 class Assignment(str):
     grammar =  Type,Identifier , ":=" , [Expression,ArrayExpression] , ";"
   
-stringToParse = "array foo := ['jose','lol'] ;" 
 
-f = parse(stringToParse, Assignment)
-print(f)

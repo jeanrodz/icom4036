@@ -14,9 +14,6 @@ Module Description: Here we define how a function looks like in izitag
 class Function(str):
     grammar = Identifier,"(",Parameters,")",";"
     
-string = "iziTag( foo, 7, 9.8,'');"
 
-f = parse(string,Function)
-print(f)
 
 

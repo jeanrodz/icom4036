@@ -16,8 +16,9 @@ Example of a comment in IziTag:
 
 """
 class Comment(str):
-    grammar = comment_cpp
+    grammar = re.compile(r"\/\*(\*(?!\/)|[^*])*\*\/")
+    
 
-stringToParse = " // Hello this is a comment in iziTag "
-f = parse(stringToParse, Comment)
-#print(f)
+
+
+
