@@ -1,0 +1,39 @@
+iziTag grammar:
+
+izitag {
+	string text := 'testing';
+	iziTitle(text);
+
+	int parId_1 := 1;
+	string parText := 'hello';
+
+	iziPar(parId_1, parText);
+	iziPar.setBold(parId1);
+	
+	iziSection();
+	int listID := 1;
+	array list_1 := [1, 2, 3];
+	iziHeader('Awesome List');
+	iziList(listID, ordered/unordered,list_1);
+	
+	iziSection();
+	int tableID := 1;
+	iziHeader('Awesome Table');
+	iziTable(int id, int rows, int columns);
+	iziTable.setColumnName(1, 1, 'Awesome Column'); // first parameter is table id, second is column number, third is string
+	iziTable.setRowName(1, 1, 'Awesome Row'); // first parameter is table id, second is row number, third is string
+	iziTable.setContent(1, 1, 'Awesome Content'); // parameters: column number, row number, string
+	
+	iziSection();
+	iziHeader('Awesome Image');
+	string imgSrc_1 := 'http://random.photo.com/sup';
+	int imgId_1 := 1;
+	iziImage(imgId_1, imageSrc_1);
+
+	
+	iziImage.setWidth(int id, int/float width);
+	iziImage.setHeight(int id, int/float height);
+	iziImage.setPosition(int id, int/float position);
+
+
+}

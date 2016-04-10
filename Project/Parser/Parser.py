@@ -9,7 +9,7 @@ In this module we have the paring of a regular function C style like this
     }
 An example is as followed
 
- int functionName( int a, long b)
+ int functionName( int a , long b)
  {
      do_this;
      do_that;
@@ -64,5 +64,6 @@ print(f.parms["a"].typing)
 print(f.parms["b"].typing)
 print(f[0])
 print(f[1])
+print(len(f))
 
 
