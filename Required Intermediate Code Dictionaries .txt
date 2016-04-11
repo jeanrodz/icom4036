@@ -12,14 +12,13 @@ State dictionary:
 		1, list: 8
 		1, header: 7
 		1, image: 6
-		1, rawTitle: 3
+		1, rawTitle: 3   //not going to be used now
 		1, identifierTitle: 4
 		1, int: 2
 		1, string: 2
 		1, float: 2
 		1, array: 2
 		1, null: 11
-	
 		5, img: 6
 		5, header: 7
 		5, list: 8
@@ -30,3 +29,47 @@ State dictionary:
 
 Empty variable dictionary
 	starts out empty
+
+-----------------------------------------------------------------------
+
+Main dictionary:
+	All lines must have a pos[0] that's in this dictionary:
+		(0, int) : 1
+		(0, float) : 2
+		(0, string) : 3
+		(0, array) : 4
+		(0, iziTtile) : 5
+		(0, iziParagraph) : 6
+		(0, iziSection) : 7
+		(0, iziList) : 8
+		(0, iziTable) : 9
+		(0, iziImg) : 10
+		(0, iziHeader) : 11
+		(0, ) : 12 
+
+Int:
+	Check if pos[1] is already a member
+		(1, pos[1]) : 0  (it is member) -> EXCEPTION
+
+	else save to dictionary	
+
+Float:
+	Check if pos[1] is already a member
+		(2, pos[1]) : 0	(it is member) -> EXCEPTION
+
+	else save to dictionary
+
+String:
+	Check if pos[1] is already a member
+		(3, pos[1]) : 0  (it is member) -> EXCEPTION
+
+	else save to dictionary
+
+Array:
+	Check if pos[1] is already a member
+		(4, pos[1]) : 0  (it is member) -> EXCEPTION
+
+	else save to dictionary
+
+** for each function in pos[0], the rest of the string will be sent to
+their respective method for html conversion
