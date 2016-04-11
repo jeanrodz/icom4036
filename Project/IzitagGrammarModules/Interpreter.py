@@ -1,4 +1,5 @@
 from __future__ import unicode_literals, print_function
+from yattag import Doc
 from ParseOutputGen import *
 
 """
@@ -16,14 +17,24 @@ def MainMachine(file,currentState,stateDictionary,maxStates):
         for line in in_file:
             newline = line.replace("\n","")
             print(newline)
-            nl = newline
-            nl.partition('[')[1].rpartition(']')[1]
-            print(nl)
+            nl = newline.replace("[","")
+            nl = nl.replace("]","")
+            nl = nl.replace("'","")
+            nl = nl.split(", ")
+            
+            
     
 print(MainMachine("out.txt", 1, stateDictionary, 11))
 
-"""
-s = "[virus 1 [isolated from china]]"
-s.partition('[')[-1].rpartition(']')[0]
-'virus 1 [isolated from china]'
-"""
+#magic
+doc, tag, text = Doc().tagtext()
+
+with tag('p'):
+    text('Hello world!')
+
+print(doc.getvalue())
+
+
+
+
+

@@ -8,7 +8,7 @@ Module Description: Here we will save the parser output in an output file
 """
 
 #This will contain the source code of the user in 1 single string 
-mySource = "iziTag{  int foo :=5;  iziPar(foo,'hola');  }"
+mySource = "iziTag{  String foo := 5;  iziPar(foo,'hola');  }"
 
 #f is the parser
 f = parse(mySource, IziTag)
