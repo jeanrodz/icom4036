@@ -19,11 +19,7 @@ class Instruction(str):
 class IziTag(str):
     grammar = "iziTag","{",attr("block",maybe_some(Instruction)),"}"
     
-string = "iziTag {  /* My First IziTag Program*/   String text := 'testing' ; iziTitle(text);  int parId_1 := 1; String parText := 'hello'; iziPar(parId_1, parText); }"
 
-f = parse(string, IziTag)
-
-print(f.block)
 
 
 """
