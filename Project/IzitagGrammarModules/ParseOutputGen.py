@@ -12,12 +12,15 @@ outpath = "source.txt"
 parsestring = ''
 inpath = input("Enter izitag source file path:  ")
 
-with open(inpath, 'r') as content_file:
-	content = content_file.read()
-	parsestring = content
-	content_file.close()
-parsestring.replace("str: ", "")
-print(parsestring)
+try:
+	with open(inpath, 'r') as content_file:
+		content = content_file.read()
+		parsestring = content
+		content_file.close()
+	parsestring.replace("str: ", "")
+	print(parsestring)
+except:
+	raise Exception("File not found or does not exist")
 
 f = parse(parsestring, IziTag)
 print(f.block)
