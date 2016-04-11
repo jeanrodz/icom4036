@@ -1,0 +1,4 @@
+izitag {
+	string text := 'testing';
+	iziTitle(text);
+	}
