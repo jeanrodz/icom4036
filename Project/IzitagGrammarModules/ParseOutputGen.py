@@ -18,7 +18,4 @@ with open("out.txt", "wt") as out_file:
     for e in f.block:
         out_file.write(e +'\n')
     
-    
-
-
 

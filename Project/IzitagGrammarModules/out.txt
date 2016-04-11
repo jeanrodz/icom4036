@@ -1,2 +1,2 @@
-['String', 'foo', '5']
-['iziPar', 'foo', 'hola']
+[u'String', u'foo', u'5']
+[u'iziPar', u'foo', u'hola']

@@ -21,6 +21,7 @@ def MainMachine(file,currentState,stateDictionary,maxStates):
             nl = nl.replace("]","")
             nl = nl.replace("'","")
             nl = nl.split(", ")
+            print(nl[0])
             
             
     
