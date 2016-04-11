@@ -1,10 +1,10 @@
 from __future__ import unicode_literals, print_function
 from yattag import Doc
-from ParseOutputGen import *
+
 
 """
 /*****************************************************
-Module Description: Here we will use the dictionaries for the state machine
+Module Description: Here we will use the dictionaries for the state machine :)
 /*****************************************************
 """
 
@@ -25,15 +25,9 @@ def MainMachine(file,currentState,stateDictionary,maxStates):
             
             
     
-print(MainMachine("out.txt", 1, stateDictionary, 11))
+print(MainMachine("source.txt", 1, stateDictionary, 11))
 
-#magic
-doc, tag, text = Doc().tagtext()
 
-with tag('p'):
-    text('Hello world!')
-
-print(doc.getvalue())
 
 
 
