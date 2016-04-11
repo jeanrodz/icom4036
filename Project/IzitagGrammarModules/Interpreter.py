@@ -25,7 +25,7 @@ load_tokens('source.txt')
 Data Definitions
 """
 
-current_token = 0
+current_token = token_stack[0]
 int_collection = {}
 float_collection = {}
 string_collection = {}
@@ -37,21 +37,25 @@ Parse-Map Dictionary
 
 
 def data_type_assignment(current_token):
-    if(token[0] == 'int'): int_collection[token[1]] = token[2]
-    elif (token[0] == 'float'): float_collection[token[1]] = token[2]
-    else : string_collection[token[1]] = token[2]
+    print(current_token)
+    if(current_token[0] == 'int'): int_collection[token[1]] = current_token[2]
+    elif (current_token[0] == 'float'): float_collection[token[1]] = current_token[2]
+    else : string_collection[current_token[1]] = current_token[2]
 
 
 parse_map = {
-    'int' : data_type_assignment,
-    'float' : data_type_assignment,
-    'string' : data_type_assignment,
+    'int' : data_type_assignment(current_token),
+    'float' : data_type_assignment(current_token),
+    'string' : data_type_assignment(current_token),
     }
 
-for token in token_stack:
-    parse_map[token[0]]
-    current_token = current_token + 1
+for index in range(0, len(token_stack)):
+    current_token = token_stack[index]
+    parse_map[current_token[0]]
+
 
 print(token_stack)
 print(string_collection)
+print(int_collection)
+print(float_collection)
 
