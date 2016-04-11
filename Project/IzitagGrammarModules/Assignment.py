@@ -14,10 +14,18 @@ class Expression(str):
     grammar = [FloatLiteral,IntLiteral,StringLiteral]
     
 class ArrayExpression(str):
-    grammar = "[",optional(csl(StringLiteral)),"]"
-
+    grammar = ArrayType, Identifier, ":=", "[",optional(csl(StringLiteral)),"]",";"
+    
+class IntExpression(str):
+    grammar = IntType, Identifier, ":=",IntLiteral,";"
+    
+class FloatExpression(str):
+    grammar = FloatType, Identifier, ":=",FloatLiteral,";"
+    
+class StringExpression(str):
+    grammar = StringType, Identifier, ":=",StringLiteral,";"
 
 class Assignment(str):
-    grammar =  Type,Identifier , ":=" , [Expression,ArrayExpression] , ";"
+    grammar =  [ArrayExpression,IntExpression,FloatExpression,StringExpression]
   
 

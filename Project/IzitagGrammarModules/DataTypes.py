@@ -22,13 +22,37 @@ class FloatLiteral(str):
 class ArrayLiteral(str):
     grammar = re.compile("\[(\'(\w+)'(?:,\'(\w+)')*)\]")
     
+class StringDataType(Keyword):
+    grammar = Enum(  K("string"))
+
+class StringType(str):
+    grammar = StringDataType
+    
+class IntDataType(Keyword):
+    grammar = Enum( K("int"))
+    
+class IntType(str):
+    grammar = IntDataType
+
+class FloatDataType(Keyword):
+    grammar = Enum(  K("float"))
+    
+class FloatType(str):
+    grammar = FloatDataType
+    
+class ArrayDataType(Keyword):
+    grammar = Enum(K("array"))
+    
+class ArrayType(str):
+    grammar = ArrayDataType
+    
 class DataType(Keyword):
-    grammar = Enum( K("int"), K("float") , K("String"),K("array"))
+    grammar = Enum( K("int"), K("float") , K("string"),K("array"))
     
 class Type(str):
     grammar = DataType
     
-    
+
 
     
 """
@@ -53,6 +77,11 @@ stringToParse = " float  "
 f = parse(stringToParse, DataType)
 print(f)
 
+
+stringToParse = " int  "
+f = parse(stringToParse, IntDataType)
+print(f)
+    
 stringToParse = " String  "
 f = parse(stringToParse, DataType)
 print(f)

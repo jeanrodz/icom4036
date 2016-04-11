@@ -1,5 +1,5 @@
 iziTag {
-	String text := 'testing';
+	string text := 'lol';
 	int foo := 5;
 	float yas := 9.9;
 	iziTitle(text);
