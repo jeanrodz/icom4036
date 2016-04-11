@@ -1,4 +1,4 @@
-izitag {
-	string text := 'testing';
-	iziTitle(text);
-	}
+['String', 'text', 'testing']
+['int', 'foo', '5']
+['float', 'yas', '9.9']
+['iziTitle', 'text']

@@ -1,4 +1,6 @@
-izitag {
-	string text := 'testing';
+iziTag {
+	String text := 'testing';
+	int foo := 5;
+	float yas := 9.9;
 	iziTitle(text);
 	}
