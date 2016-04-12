@@ -14,6 +14,7 @@ float_collection = {}
 string_collection = {}
 array_collection = {}
 title_collection = {}
+section_stack = []
 
 condition = False
 
@@ -67,24 +68,40 @@ def load_tokens(file):
     with open(file,"rt") as in_file:
         for line in in_file:
             newline = line.replace("\n","")
+            #if (newline == "iziSection") : newline = ['iziSection']
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
             nl = nl.split(", ")
             
-            if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
-            elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'array') & (nl[1] not in array_collection)): array_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
-            elif (nl[0] == 'iziSection'): section_function(condition)
-            elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
+            #if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
+            #elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
+            #elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
+            #elif ((nl[0] == 'array') & (nl[1] not in array_collection)): array_collection[nl[1]] = nl[2]
+            #elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
+            #elif (nl[0] == 'iziSection'): section_function(condition)
+            #elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
            # elif ((nl[0] == 'iziList') & (nl[1] in array_collection)): list_function(nl)      
+            
             token_stack.append(nl)
-                      
 
-load_tokens('source.txt')  
+source_file ="source.txt"
+load_tokens(source_file)  
 
+for i in range(0, len(token_stack)):
+    token = token_stack[i]
+    if token[0] == 'iziSection':
+        section = [ ]
+        for j in range(i, (len(token_stack))):
+            temp_token = token_stack[j]
+            if(temp_token[0] != 'iziSection'):
+                section.append(temp_token)
+            else:
+                break
+        section_stack.append(section)
+        
+print(section_stack)               
+        
 print(int_collection)
 print(string_collection)
 print(float_collection)
