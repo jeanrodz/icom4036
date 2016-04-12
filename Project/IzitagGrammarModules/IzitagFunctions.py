@@ -36,7 +36,7 @@ class IziTable(str):
     grammar = IziTagFunctionName,"(",IntLiteral,",",IntLiteral,"," , IntLiteral , ")",";"
 
 class IziImage(str):
-    grammar = IziTagFunctionName,"(",IntLiteral,",",StringLiteral,")",";"
+    grammar = IziTagFunctionName,"(",[Identifier],",", [Identifier], ",", [Identifier],")",";"
     
 class IziList(str):
     grammar = IziTagFunctionName,"(",IntLiteral,",",IziTagListOrder,",",Identifier,")",";"

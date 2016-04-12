@@ -64,8 +64,17 @@ def paragraph_function(nl):
         text(string_collection.get(nl1))
     '''
 def iziImage(source, height, width):
-    print(r"<img src={} height={} width={}>").format(source, height, width)
-
+    if ((height in int_collection) or (height in float_collection)) & ((width in int_collection) or (width in float_collection)):
+    
+        if (height in int_collection): imgheight = int_collection.get(height)
+        elif (height in float_collection): imgheight = float_collection.get(height)
+    
+        if (width in int_collection): imgwidth = int_collection.get(width)
+        elif (width in float_collection): imgwidth = float_collection.get(width)
+    
+        print(r"<img src=" + source + " height='" + imgheight + "'" + " width='" + imgwidth + "'>")
+    
+    else : print("S#!T")
     
 #def list_function(nl):
  #   if (nl[2] == "ordered"):
@@ -76,6 +85,7 @@ def load_tokens(file):
         for line in in_file:
             newline = line.replace("\n","")
             if (newline == "iziSection") : newline = "['iziSection', '']"
+            if (newline == "") : break
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
