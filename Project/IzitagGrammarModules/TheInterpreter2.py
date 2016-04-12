@@ -63,6 +63,9 @@ def paragraph_function(nl):
     with tag('p'):
         text(string_collection.get(nl1))
     '''
+def iziImage(source, height, width):
+    print(r"<img src={} height={} width={}>").format(source, height, width)
+
     
 #def list_function(nl):
  #   if (nl[2] == "ordered"):
@@ -83,6 +86,7 @@ def load_tokens(file):
             elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
             elif ((nl[0] == 'array') & (nl[1] not in array_collection)): array_collection[nl[1]] = nl[2]
             elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
+            elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
             #elif (nl[0] == 'iziSection'): section_function(condition)
             elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
            # elif ((nl[0] == 'iziList') & (nl[1] in array_collection)): list_function(nl)      
