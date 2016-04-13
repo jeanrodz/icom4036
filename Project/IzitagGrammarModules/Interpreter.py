@@ -100,7 +100,17 @@ def add_array(nl):
     print(array_collection)
 
 def table_function(nl):
-    print("Jean is going to do this part!!")    
+    print("<table>")
+    print("<tr><th>" + nl[0] + "</th></tr>")  
+    for row_index in range(1, len(nl)):
+        print("<tr>")
+        for item in range(item, len(nl[row_index]):
+            print("<td>" + nl[row_index][item] + "</td>")
+        print("</tr>")
+    print("</table>")
+
+
+
 
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
