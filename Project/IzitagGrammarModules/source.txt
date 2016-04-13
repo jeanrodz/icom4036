@@ -2,8 +2,5 @@
 ['int', 'foo', '5']
 ['float', 'yas', '9.9']
 ['iziTitle', 'text']
-['iziImage', 'text', 'foo', 'yas']
-['iziImage', 'text', 'blah', 'yas']
-
-
-
+['array', 'blah', 'hi', 'hola', 'blah']
+['iziList', 'unordered', 'blah']

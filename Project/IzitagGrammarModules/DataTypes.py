@@ -41,7 +41,7 @@ class FloatType(str):
     grammar = FloatDataType
     
 class ArrayDataType(Keyword):
-    grammar = Enum(K("array"))
+    grammar = Enum( K("array"))
     
 class ArrayType(str):
     grammar = ArrayDataType

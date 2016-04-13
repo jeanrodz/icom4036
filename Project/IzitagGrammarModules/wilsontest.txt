@@ -3,5 +3,6 @@ iziTag {
 	int foo := 5;
 	float yas := 9.9;
 	iziTitle(text);
-	iziSection();
+	array blah := ['hi', 'hola', 'blah'];
+	iziList(unordered, blah);
 	}

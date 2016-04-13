@@ -67,18 +67,47 @@ def iziImage(source, height, width):
     if ((height in int_collection) or (height in float_collection)) & ((width in int_collection) or (width in float_collection)):
     
         if (height in int_collection): imgheight = int_collection.get(height)
-        elif (height in float_collection): imgheight = float_collection.get(height)
+        else : imgheight = float_collection.get(height)
     
         if (width in int_collection): imgwidth = int_collection.get(width)
-        elif (width in float_collection): imgwidth = float_collection.get(width)
+        else : imgwidth = float_collection.get(width)
     
-        print(r"<img src=" + source + " height='" + imgheight + "'" + " width='" + imgwidth + "'>")
+        print("<img src='" + source + "' height='" + imgheight + "'" + " width='" + imgwidth + "'>")
     
     else : print("S#!T")
     
-#def list_function(nl):
- #   if (nl[2] == "ordered"):
-  #      for (i = )
+def list_function(nl):
+    list_items = array_collection.get(nl[2])  
+
+    if (nl[1] == "ordered"): 
+        print("<ol>");
+        for i in range(0, len(list_items)): print("<li>" + list_items[i] + "</li>")
+        print("</ol>")
+        
+    elif (nl[1] == "unordered"): 
+        print("<ul>")
+        for i in range(0, len(list_items)): print("<li>" + list_items[i] + "</li>")
+        print("</ul>")
+    
+    else : print("WHAT KIND OF LIST ARE YOU TRYING TO DO?!")
+        
+def add_array(nl):
+    array_items = []
+    for i in range(2, len(nl)):
+        array_items.append(nl[i])
+    
+    array_collection[nl[1]] = array_items
+    print(array_collection)
+
+def instruction_checker(nl):
+    if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
+    elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
+    elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
+    elif ((nl[0] == 'array') & (nl[1] not in array_collection)): add_array(nl)
+    elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
+    elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
+    elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
+    elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl)   
 
 def load_tokens(file): 
     with open(file,"rt") as in_file:
@@ -91,15 +120,7 @@ def load_tokens(file):
             nl = nl.replace("'","")
             nl = nl.split(", ")
             
-            if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
-            elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'array') & (nl[1] not in array_collection)): array_collection[nl[1]] = nl[2]
-            elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
-            elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
-            #elif (nl[0] == 'iziSection'): section_function(condition)
-            elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
-           # elif ((nl[0] == 'iziList') & (nl[1] in array_collection)): list_function(nl)      
+            instruction_checker(nl)   
             
             token_stack.append(nl)
 
@@ -117,12 +138,12 @@ for i in range(0, len(token_stack)):
                 break
         section_stack.append(section)
         
-print(section_stack)               
+#print(section_stack)               
         
-print(int_collection)
-print(string_collection)
-print(float_collection)
-print(array_collection)
+#print(int_collection)
+#print(string_collection)
+#print(float_collection)
+#print(array_collection)
 
 
 

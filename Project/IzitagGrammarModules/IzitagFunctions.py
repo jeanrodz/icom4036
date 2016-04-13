@@ -12,7 +12,7 @@ class IziTagFunctionKeywords(Keyword):
     grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"),K("iziList"))
 
 class ListKeywords(Keyword):
-    grammar = Enum(K("ordered"),K("unordered"))
+    grammar = Enum( K("ordered"),K("unordered"))
     
 class IziTagFunctionName(str):
     grammar = IziTagFunctionKeywords
@@ -39,12 +39,11 @@ class IziImage(str):
     grammar = IziTagFunctionName,"(",[Identifier],",", [Identifier], ",", [Identifier],")",";"
     
 class IziList(str):
-    grammar = IziTagFunctionName,"(",IntLiteral,",",IziTagListOrder,",",Identifier,")",";"
+    grammar = IziTagFunctionName,"(",IziTagListOrder,",",Identifier,")",";"
     
 class IziTagFunctions(str):
-    grammar =[IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]
+    grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]
     
-
 
     
 
