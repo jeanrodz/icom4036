@@ -1,6 +1,7 @@
 from __future__ import unicode_literals, print_function
 from pypeg2 import *
 from Function import *
+from array import ArrayType
 
 
 """
@@ -33,7 +34,7 @@ class IziHeader(str):
     grammar = IziTagFunctionName,"(",StringLiteral,")",";"
 
 class IziTable(str):
-    grammar = IziTagFunctionName,"(",IntLiteral,",",IntLiteral,"," , IntLiteral , ")",";"
+    grammar = IziTagFunctionName,"(",Identifier,",",optional(csl(Identifier)), ")",";"
 
 class IziImage(str):
     grammar = IziTagFunctionName,"(",[Identifier],",", [Identifier], ",", [Identifier],")",";"
@@ -43,6 +44,7 @@ class IziList(str):
     
 class IziTagFunctions(str):
     grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]
+    
     
 
     

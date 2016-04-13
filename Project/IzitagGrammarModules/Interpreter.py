@@ -99,6 +99,9 @@ def add_array(nl):
     array_collection[nl[1]] = array_items
     print(array_collection)
 
+def table_function(nl):
+    print("Jean is going to do this part!!")    
+
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
     elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
@@ -107,7 +110,8 @@ def instruction_checker(nl):
     elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
     elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
     elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
-    elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl)   
+    elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
+    elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
 
 def load_tokens(file): 
     with open(file,"rt") as in_file:

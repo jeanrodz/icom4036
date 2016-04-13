@@ -4,3 +4,4 @@
 ['iziTitle', 'text']
 ['array', 'blah', 'hi', 'hola', 'blah']
 ['iziList', 'unordered', 'blah']
+['iziTable', 'text', 'blah']
