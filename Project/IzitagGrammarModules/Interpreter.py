@@ -101,11 +101,12 @@ def add_array(nl):
 
 def table_function(nl):
     print("<table>")
-    print("<tr><th>" + nl[0] + "</th></tr>")  
-    for row_index in range(1, len(nl)):
+    print("<tr><th>" + string_collection.get(nl[1]) + "</th></tr>")  
+    for row_index in range(2, len(nl)):
         print("<tr>")
-        for item in range(item, len(nl[row_index]):
-            print("<td>" + nl[row_index][item] + "</td>")
+        row = array_collection[nl[row_index]]
+        for item in row:
+            print("<td>" + item + "</td>")
         print("</tr>")
     print("</table>")
 
