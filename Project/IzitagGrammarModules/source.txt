@@ -3,5 +3,6 @@
 ['float', 'yas', '9.9']
 ['iziTitle', 'text']
 ['array', 'blah', 'hi', 'hola', 'blah']
+iziSection
 ['iziList', 'unordered', 'blah']
 ['iziTable', 'text', 'blah']

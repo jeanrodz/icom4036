@@ -97,7 +97,7 @@ def add_array(nl):
         array_items.append(nl[i])
     
     array_collection[nl[1]] = array_items
-    print(array_collection)
+    #print(array_collection)
 
 def table_function(nl):
     print("<table>")
@@ -109,9 +109,6 @@ def table_function(nl):
             print("<td>" + item + "</td>")
         print("</tr>")
     print("</table>")
-
-
-
 
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
@@ -125,21 +122,27 @@ def instruction_checker(nl):
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
 
 def load_tokens(file): 
+    found_section = False
+    
     with open(file,"rt") as in_file:
         for line in in_file:
             newline = line.replace("\n","")
-            if (newline == "iziSection") : newline = "['iziSection', '']"
+            if (newline == "iziSection") : 
+                newline = "['iziSection', '']"
+                found_section = True
+                
             if (newline == "") : break
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
             nl = nl.split(", ")
             
-            instruction_checker(nl)   
+            if (found_section) : token_stack.append(nl)
+            else : instruction_checker(nl)
             
-            token_stack.append(nl)
+load_tokens('source.txt')
 
-load_tokens('source.txt')  
+print (token_stack)
 
 for i in range(0, len(token_stack)):
     token = token_stack[i]
@@ -153,7 +156,7 @@ for i in range(0, len(token_stack)):
                 break
         section_stack.append(section)
         
-#print(section_stack)               
+print(section_stack)               
         
 #print(int_collection)
 #print(string_collection)
