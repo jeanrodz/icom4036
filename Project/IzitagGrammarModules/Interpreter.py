@@ -5,7 +5,7 @@ from yattag import indent
 
 """
 /*****************************************************
-Module Description: Here we will use the dictionaries for the state machine :)
+Stacks and Collections
 /*****************************************************
 """
 
@@ -20,17 +20,9 @@ section_stack = []
 condition = False
 
 """
-outpath = "index.html"
-
-with open (outpath, "wt") as outfile:
-    outfile.write("<!DOCTYPE html>\n")
-    outfile.write("<html>\n")
-    outfile.write("<head>\n")
-    outfile.write("</head>\n")
-    outfile.write("<body>\n")
-    outfile.write("</body>\n")
-    outfile.write("</html>\n")
-    outfile.close()
+/*****************************************************
+Intermediate Code Functions and Analysis
+/*****************************************************
 """
 
 doc, tag, text = Doc().tagtext()
@@ -80,7 +72,6 @@ def add_array(nl):
         array_items.append(nl[i])
     
     array_collection[nl[1]] = array_items
-    #print(array_collection)
 
 def table_function(nl):
     with tag('table'):
@@ -104,6 +95,13 @@ def instruction_checker(nl):
     elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
     elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
+
+
+"""
+/*****************************************************
+File Reader and Stack Creator
+/*****************************************************
+"""
 
 def load_tokens(file): 
     found_section = False
@@ -140,7 +138,13 @@ for i in range(0, len(token_stack)):
                 break
         section_stack.append(section)
         
-print(section_stack)               
+print(section_stack)
+
+"""
+/*****************************************************
+HTML Doc Generation
+/*****************************************************
+"""               
 
 doc.asis('<!DOCTYPE html>')
 with tag('html'):       
@@ -152,7 +156,7 @@ with tag('html'):
                     print (element)
                     instruction_checker(element)
                     
-                        #text("".join(element) + '\n')
+
 result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
     
 outpath = "index.html"
@@ -161,10 +165,7 @@ with open (outpath, "wt") as outfile:
     outfile.write(result)
     outfile.close()   
         
-#print(int_collection)
-#print(string_collection)
-#print(float_collection)
-#print(array_collection)
+
 
 
 
