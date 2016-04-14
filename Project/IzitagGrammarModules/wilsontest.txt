@@ -2,7 +2,10 @@ iziTag {
 	string text := 'lol';
 	int foo := 5;
 	float yas := 9.9;
+	string par_text := 'Hola, como te llamas?';
 	iziTitle(text);
+	iziSection(foo);
 	array blah := ['hi', 'hola', 'blah'];
 	iziList(unordered, blah);
+	iziPar(par_text);
 	}

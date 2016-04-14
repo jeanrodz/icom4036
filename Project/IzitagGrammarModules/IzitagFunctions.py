@@ -25,10 +25,10 @@ class IziTitle(str):
     grammar = IziTagFunctionName,"(",[Identifier,StringLiteral],")",";"
     
 class IziPar(str):
-    grammar = IziTagFunctionName,"(",[Identifier,IntLiteral],",",[StringLiteral,Identifier], ")",";"
+    grammar = IziTagFunctionName,"(", [Identifier], ")",";"
 
 class IziSection(str):
-    grammar = IziTagFunctionName,"(",")",";"
+    grammar = IziTagFunctionName,"(", Identifier,")",";"
     
 class IziHeader(str):
     grammar = IziTagFunctionName,"(",StringLiteral,")",";"

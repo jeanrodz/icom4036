@@ -8,7 +8,7 @@ Module Description: Here we define how a datatype looks like in izitag
 """
 
 class StringLiteral(str):
-     fulltString = "'",word,"'"
+     fulltString = "'", maybe_some(word),"'"
      emptyString = "''"
      grammar = [emptyString,fulltString]
     
@@ -86,3 +86,7 @@ stringToParse = " String  "
 f = parse(stringToParse, DataType)
 print(f)
 """
+
+stringToParse = " 'Hola como estas' "
+f = parse(stringToParse, StringLiteral)
+print (f)

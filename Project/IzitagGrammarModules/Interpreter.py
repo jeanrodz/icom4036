@@ -73,6 +73,16 @@ def add_array(nl):
     
     array_collection[nl[1]] = array_items
 
+def add_string(nl):
+    string_list = []
+    for i in range(2, len(nl)): 
+        string_list.append(nl[i])
+
+    temp_string = "".join(string_list)
+    print(temp_string)
+    
+    string_collection[nl[1]] = temp_string
+    
 def table_function(nl):
     with tag('table'):
         with tag('tr'):
@@ -87,7 +97,7 @@ def table_function(nl):
 
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
-    elif ((nl[0] == 'string') & (nl[1] not in string_collection)): string_collection[nl[1]] = nl[2] 
+    elif ((nl[0] == 'string') & (nl[1] not in string_collection)): add_string(nl) 
     elif ((nl[0] == 'float') & (nl[1] not in float_collection)): float_collection[nl[1]] = nl[2]
     elif ((nl[0] == 'array') & (nl[1] not in array_collection)): add_array(nl)
     elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
@@ -150,7 +160,7 @@ doc.asis('<!DOCTYPE html>')
 with tag('html'):       
     with tag ('body'):
         for i in range(0, len(section_stack)):
-            with tag ('section', class='{}'.format(section_stack[i][1])):
+            with tag ('section'):
                 text('\n')
                 for element in section_stack[i]:
                     print (element)
