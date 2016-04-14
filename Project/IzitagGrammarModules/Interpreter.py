@@ -150,7 +150,7 @@ doc.asis('<!DOCTYPE html>')
 with tag('html'):       
     with tag ('body'):
         for i in range(0, len(section_stack)):
-            with tag ('section'):
+            with tag ('section', class='{}'.format(section_stack[i][1])):
                 text('\n')
                 for element in section_stack[i]:
                     print (element)
