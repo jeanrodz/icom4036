@@ -3,7 +3,7 @@ iziSection
 ['int', 'foo', '5']
 ['float', 'yas', '9.9']
 ['iziTitle', 'text']
-['array', 'blah', 'hi', 'hola', 'blah']
+['array', 'blah', 'stuff', 'your', 'face']
 iziSection
 ['iziList', 'unordered', 'blah']
 ['iziTable', 'text', 'blah']

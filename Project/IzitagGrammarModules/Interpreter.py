@@ -34,38 +34,16 @@ with open (outpath, "wt") as outfile:
 """
 
 doc, tag, text = Doc().tagtext()
-
-"""
-doc.asis('<!DOCTYPE html>')
-with tag('html'):
-    with tag('head'):
-        with tag('title'):
-            text('Hello world!')
-    with tag ('body'):
-        text('Hello world!')
-    
-outpath = "index.html"
-
-with open (outpath, "wt") as outfile:
-    outfile.write(doc.getvalue())
-    outfile.close()
-"""
             
 def title_function(nl):
-    print("<title>" + string_collection.get(nl[1]) + "</title>")
-
-def section_function(condition):
-    if (condition == True): print("</section>" + "<section>")
-    else : 
-        print("<section>")
-        condition = True
-
-def paragraph_function(nl):
-    print("<p>" + string_collection.get(nl[1]) + "</p>")
-    '''
+    with tag('head'):
+        with tag ('title'):
+            text(string_collection.get(nl[1]))
+    
+def paragraph_function(nl):  
     with tag('p'):
-        text(string_collection.get(nl1))
-    '''
+        text(string_collection.get(nl[1]))
+    
 def iziImage(source, height, width):
     if ((height in int_collection) or (height in float_collection)) & ((width in int_collection) or (width in float_collection)):
     
@@ -82,16 +60,18 @@ def iziImage(source, height, width):
 def list_function(nl):
     list_items = array_collection.get(nl[2])  
 
-    if (nl[1] == "ordered"): 
-        print("<ol>");
-        for i in range(0, len(list_items)): print("<li>" + list_items[i] + "</li>")
-        print("</ol>")
-        
+    if (nl[1] == "ordered"):
+        with tag('ol'): 
+            for i in range(0, len(list_items)): 
+                with tag('li'):     
+                    text(list_items[i])
+               
     elif (nl[1] == "unordered"): 
-        print("<ul>")
-        for i in range(0, len(list_items)): print("<li>" + list_items[i] + "</li>")
-        print("</ul>")
-    
+        with tag('ul'):
+            for i in range(0, len(list_items)): 
+                with tag('li'):
+                    text(list_items[i])
+            
     else : print("WHAT KIND OF LIST ARE YOU TRYING TO DO?!")
         
 def add_array(nl):
@@ -103,15 +83,16 @@ def add_array(nl):
     #print(array_collection)
 
 def table_function(nl):
-    print("<table>")
-    print("<tr><th>" + string_collection.get(nl[1]) + "</th></tr>")  
-    for row_index in range(2, len(nl)):
-        print("<tr>")
-        row = array_collection[nl[row_index]]
-        for item in row:
-            print("<td>" + item + "</td>")
-        print("</tr>")
-    print("</table>")
+    with tag('table'):
+        with tag('tr'):
+            with tag('th'):
+                text(string_collection.get(nl[1]))
+                for row_index in range(2, len(nl)):
+                    with tag('tr'):
+                        row = array_collection[nl[row_index]]
+                        for item in row:
+                            with tag('td'):
+                                text(item)
 
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
@@ -162,14 +143,16 @@ for i in range(0, len(token_stack)):
 print(section_stack)               
 
 doc.asis('<!DOCTYPE html>')
-with tag('html'):
-    with tag('head'):          
-        with tag ('body'):
-             for i in range(0, len(section_stack)):
-                with tag ('section'):
-                    text('\n')
-                    for element in section_stack[i]:
-                        text("".join(element) + '\n')
+with tag('html'):       
+    with tag ('body'):
+        for i in range(0, len(section_stack)):
+            with tag ('section'):
+                text('\n')
+                for element in section_stack[i]:
+                    print (element)
+                    instruction_checker(element)
+                    
+                        #text("".join(element) + '\n')
 result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
     
 outpath = "index.html"
