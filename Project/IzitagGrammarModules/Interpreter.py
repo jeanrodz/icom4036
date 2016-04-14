@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, print_function
 from yattag import Doc
+from yattag import indent
 
 
 """
@@ -34,6 +35,7 @@ with open (outpath, "wt") as outfile:
 
 doc, tag, text = Doc().tagtext()
 
+"""
 doc.asis('<!DOCTYPE html>')
 with tag('html'):
     with tag('head'):
@@ -47,6 +49,7 @@ outpath = "index.html"
 with open (outpath, "wt") as outfile:
     outfile.write(doc.getvalue())
     outfile.close()
+"""
             
 def title_function(nl):
     print("<title>" + string_collection.get(nl[1]) + "</title>")
@@ -157,6 +160,23 @@ for i in range(0, len(token_stack)):
         section_stack.append(section)
         
 print(section_stack)               
+
+doc.asis('<!DOCTYPE html>')
+with tag('html'):
+    with tag('head'):          
+        with tag ('body'):
+             for i in range(0, len(section_stack)):
+                with tag ('section'):
+                    text('\n')
+                    for element in section_stack[i]:
+                        text("".join(element) + '\n')
+result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
+    
+outpath = "index.html"
+
+with open (outpath, "wt") as outfile:
+    outfile.write(result)
+    outfile.close()   
         
 #print(int_collection)
 #print(string_collection)
