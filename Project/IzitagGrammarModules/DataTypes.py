@@ -86,7 +86,3 @@ stringToParse = " String  "
 f = parse(stringToParse, DataType)
 print(f)
 """
-
-stringToParse = " 'Hola, como estas?' "
-f = parse(stringToParse, StringLiteral)
-print (f)

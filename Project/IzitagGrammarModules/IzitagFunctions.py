@@ -47,8 +47,3 @@ class IziHyper(str):
     
 class IziTagFunctions(str):
     grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList,IziHyper]
-    
-    
-string = "iziHyper(yourface, stuff)"
-f = parse(string, IziHyper)
-print(f)  

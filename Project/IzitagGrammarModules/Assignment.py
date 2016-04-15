@@ -27,7 +27,3 @@ class StringExpression(str):
 
 class Assignment(str):
     grammar = [ArrayExpression,IntExpression,FloatExpression,StringExpression]
-  
-string = "string var := Hola, como estas? Mucho gusto"
-f = parse(string, StringExpression)
-print(f)

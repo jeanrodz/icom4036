@@ -1,6 +1,8 @@
 from __future__ import unicode_literals, print_function
 from yattag import Doc
 from yattag import indent
+from pydoc import doc
+import ParseOutputGen
 
 
 """
@@ -18,6 +20,59 @@ title_collection = {}
 section_stack = []
 
 condition = False
+
+"""
+/*****************************************************
+HTML Doc Generation
+/*****************************************************
+""" 
+
+def main():
+    doc.asis('<!DOCTYPE html>')
+    with tag('html'):       
+        with tag ('body'):
+            load_tokens('source.txt')
+            section_id = []
+
+            for i in range(0, len(token_stack)):
+                token = token_stack[i]
+                if token[0] == 'iziSection':
+                    section = [ ]
+                    id = token[1]
+                    print(id)
+                
+                    for j in range(i+1, (len(token_stack))):
+                        temp_token = token_stack[j]
+                        if(temp_token[0] != 'iziSection'):
+                            section.append(temp_token)
+                        else:
+                            break
+                    
+                    section_stack.append(section)
+                    section_id.append(id)
+                    print(section_id)
+
+            counter = 0
+            for j in range(0, len(section_stack)):
+                section_class = token_stack[j]
+            
+                if (section_id[counter] not in string_collection) : print("stop bullshitting!")
+                else :
+                    print(string_collection.get(section_id[counter]))
+                    with tag ('section', klass = string_collection.get(section_id[counter])):
+                        text('\n')
+                        for element in section_stack[j]:
+                        
+                            instruction_checker(element)                         
+                    counter = counter + 1
+            
+    result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
+    
+    outpath = "index.html"
+
+    with open (outpath, "wt") as outfile:
+        outfile.write(result)
+        outfile.close()   
 
 """
 /*****************************************************
@@ -44,8 +99,9 @@ def iziImage(source, height, width):
     
         if (width in int_collection): imgwidth = int_collection.get(width)
         else : imgwidth = float_collection.get(width)
-    
-        doc.stag('img', src = source, height = imgheight, width = imgwidth)
+        
+        with tag('img'):
+            doc.attr(src = source, height = imgheight, width = imgwidth)
     
     else : print("S#!T")
     
@@ -72,7 +128,6 @@ def add_array(nl):
         array_items.append(nl[i])
     
     array_collection[nl[1]] = array_items
-    #print(array_collection)
     
 def hyper_function(alias, url):
     with tag('a'):
@@ -92,7 +147,7 @@ def add_string(nl):
     else : string_list.append(nl[i])
 
     temp_string = temp_string.join(string_list)
-    #print(temp_string)
+    
     string_collection[nl[1]] = temp_string
     
 def table_function(nl):
@@ -148,64 +203,3 @@ def load_tokens(file):
              
             if (found_section) : token_stack.append(nl)
             else : instruction_checker(nl)
-            
-#load_tokens('source.txt')
-
-#print (token_stack)
-
-"""
-/*****************************************************
-HTML Doc Generation
-/*****************************************************
-"""  
-
-doc.asis('<!DOCTYPE html>')
-with tag('html'):       
-    with tag ('body'):
-        load_tokens('source.txt')
-        section_id = []
-
-        for i in range(0, len(token_stack)):
-            token = token_stack[i]
-            if token[0] == 'iziSection':
-                section = [ ]
-                id = token[1]
-                print(id)
-                
-                for j in range(i+1, (len(token_stack))):
-                    temp_token = token_stack[j]
-                    if(temp_token[0] != 'iziSection'):
-                        section.append(temp_token)
-                    else:
-                        break
-                    
-                section_stack.append(section)
-                section_id.append(id)
-                print(section_id)
-
-        counter = 0
-        for j in range(0, len(section_stack)):
-            section_class = token_stack[j]
-            
-            if (section_id[counter] not in string_collection) : print("stop bullshitting!")
-            else :
-                print(string_collection.get(section_id[counter]))
-                with tag ('section', klass = string_collection.get(section_id[counter])):
-                    text('\n')
-                    for element in section_stack[j]:
-                        #print (element)
-                        instruction_checker(element)                         
-            counter = counter + 1
-            
-result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
-    
-outpath = "index.html"
-
-with open (outpath, "wt") as outfile:
-    outfile.write(result)
-    outfile.close()   
-        
-
-
-
-
