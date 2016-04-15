@@ -26,7 +26,7 @@ Intermediate Code Functions and Analysis
 """
 
 doc, tag, text = Doc().tagtext()
-            
+          
 def title_function(nl):
     with tag('head'):
         with tag ('title'):
@@ -45,7 +45,7 @@ def iziImage(source, height, width):
         if (width in int_collection): imgwidth = int_collection.get(width)
         else : imgwidth = float_collection.get(width)
     
-        print("<img src='" + source + "' height='" + imgheight + "'" + " width='" + imgwidth + "'>")
+        doc.stag('img', src = source, height = imgheight, width = imgwidth)
     
     else : print("S#!T")
     
@@ -72,15 +72,22 @@ def add_array(nl):
         array_items.append(nl[i])
     
     array_collection[nl[1]] = array_items
+    #print(array_collection)
 
 def add_string(nl):
     string_list = []
-    for i in range(2, len(nl)): 
-        string_list.append(nl[i])
-
-    temp_string = "".join(string_list)
-    print(temp_string)
+    temp_string = ""
     
+    if (len(nl) > 2) : 
+        string_list.append(nl[2])
+        for i in range(3, len(nl)):
+            string_list.append(', ')
+            string_list.append(nl[i])
+    
+    else : string_list.append(nl[i])
+
+    temp_string = temp_string.join(string_list)
+    #print(temp_string)
     string_collection[nl[1]] = temp_string
     
 def table_function(nl):
@@ -102,7 +109,7 @@ def instruction_checker(nl):
     elif ((nl[0] == 'array') & (nl[1] not in array_collection)): add_array(nl)
     elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
     elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
-    elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
+    elif ((nl[0] == 'iziPar') & (nl[1] in string_collection)): paragraph_function(nl)
     elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
 
@@ -119,54 +126,70 @@ def load_tokens(file):
     with open(file,"rt") as in_file:
         for line in in_file:
             newline = line.replace("\n","")
-            if (newline == "iziSection") : 
-                newline = "['iziSection', '']"
-                found_section = True
+            #if (newline == "iziSection") : 
+            #    newline = "['iziSection', '']"
+            #    found_section = True
                 
             if (newline == "") : break
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
+            #nl = nl.replace("\\", "")
+            #nl = nl.replace("\"", "")
             nl = nl.split(", ")
-            
+            if (nl[0] == "iziSection") : found_section = True
+             
             if (found_section) : token_stack.append(nl)
             else : instruction_checker(nl)
             
-load_tokens('source.txt')
+#load_tokens('source.txt')
 
-print (token_stack)
-
-for i in range(0, len(token_stack)):
-    token = token_stack[i]
-    if token[0] == 'iziSection':
-        section = [ ]
-        for j in range(i+1, (len(token_stack))):
-            temp_token = token_stack[j]
-            if(temp_token[0] != 'iziSection'):
-                section.append(temp_token)
-            else:
-                break
-        section_stack.append(section)
-        
-print(section_stack)
+#print (token_stack)
 
 """
 /*****************************************************
 HTML Doc Generation
 /*****************************************************
-"""               
+"""  
 
 doc.asis('<!DOCTYPE html>')
 with tag('html'):       
     with tag ('body'):
-        for i in range(0, len(section_stack)):
-            with tag ('section'):
-                text('\n')
-                for element in section_stack[i]:
-                    print (element)
-                    instruction_checker(element)
-                    
+        load_tokens('source.txt')
+        section_id = []
 
+        for i in range(0, len(token_stack)):
+            token = token_stack[i]
+            if token[0] == 'iziSection':
+                section = [ ]
+                id = token[1]
+                print(id)
+                
+                for j in range(i+1, (len(token_stack))):
+                    temp_token = token_stack[j]
+                    if(temp_token[0] != 'iziSection'):
+                        section.append(temp_token)
+                    else:
+                        break
+                    
+                section_stack.append(section)
+                section_id.append(id)
+                print(section_id)
+
+        counter = 0
+        for j in range(0, len(section_stack)):
+            section_class = token_stack[j]
+            
+            if (section_id[counter] not in string_collection) : print("stop bullshitting!")
+            else :
+                print(string_collection.get(section_id[counter]))
+                with tag ('section', klass = string_collection.get(section_id[counter])):
+                    text('\n')
+                    for element in section_stack[j]:
+                        #print (element)
+                        instruction_checker(element)                         
+            counter = counter + 1
+            
 result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
     
 outpath = "index.html"

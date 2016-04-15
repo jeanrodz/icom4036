@@ -14,18 +14,20 @@ class Expression(str):
     grammar = [FloatLiteral,IntLiteral,StringLiteral]
     
 class ArrayExpression(str):
-    grammar = ArrayType, Identifier, ":=", "[",optional(csl(StringLiteral)),"]",";"
+    grammar = ArrayType, Identifier, ":=", ArrayLiteral
     
 class IntExpression(str):
-    grammar = IntType, Identifier, ":=",IntLiteral,";"
+    grammar = IntType, Identifier, ":=",IntLiteral
     
 class FloatExpression(str):
-    grammar = FloatType, Identifier, ":=",FloatLiteral,";"
+    grammar = FloatType, Identifier, ":=",FloatLiteral
     
 class StringExpression(str):
-    grammar = StringType, Identifier, ":=",StringLiteral,";"
+    grammar = StringType, Identifier, ":=", StringLiteral
 
 class Assignment(str):
-    grammar =  [ArrayExpression,IntExpression,FloatExpression,StringExpression]
+    grammar = [ArrayExpression,IntExpression,FloatExpression,StringExpression]
   
-
+string = "string var := Hola, como estas? Mucho gusto"
+f = parse(string, StringExpression)
+print(f)
