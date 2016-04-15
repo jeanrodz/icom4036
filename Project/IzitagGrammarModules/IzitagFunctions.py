@@ -22,25 +22,25 @@ class IziTagListOrder(str):
     grammar = ListKeywords
             
 class IziTitle(str):
-    grammar = IziTagFunctionName,"(",[Identifier],")",";"
+    grammar = IziTagFunctionName,"(",[Identifier],")"
     
 class IziPar(str):
-    grammar = IziTagFunctionName,"(", [Identifier], ")",";"
+    grammar = IziTagFunctionName,"(", [Identifier], ")"
 
 class IziSection(str):
-    grammar = IziTagFunctionName,"(", Identifier,")",";"
+    grammar = IziTagFunctionName,"(", Identifier,")"
     
 class IziHeader(str):
-    grammar = IziTagFunctionName,"(",StringLiteral,")",";"
+    grammar = IziTagFunctionName,"(",StringLiteral,")"
 
 class IziTable(str):
-    grammar = IziTagFunctionName,"(",Identifier,",",optional(csl(Identifier)), ")",";"
+    grammar = IziTagFunctionName,"(",Identifier,",",optional(csl(Identifier)), ")"
 
 class IziImage(str):
-    grammar = IziTagFunctionName,"(",[Identifier],",", [Identifier], ",", [Identifier],")",";"
+    grammar = IziTagFunctionName,"(",[Identifier],",", [Identifier], ",", [Identifier],")"
     
 class IziList(str):
-    grammar = IziTagFunctionName,"(",IziTagListOrder,",",Identifier,")",";"
+    grammar = IziTagFunctionName,"(",IziTagListOrder,",",Identifier,")"
     
 class IziTagFunctions(str):
     grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]

@@ -1,10 +1,15 @@
 iziTag {
-	string text := 'lol'
-	int foo := 5;
-	float yas := 9.9;
-	string par_text := 'Hola, como te llamas? Mucho gusto'
-	iziTitle(text);
-	array blah := ['hi', 'hola', 'blah'];
-	iziList(unordered, blah);
-	iziPar(par_text);
+	string text := lol
+	int foo := 5
+	float yas := 9.9
+	string par_text := Hola, como te llamas? Mucho gusto.
+	iziTitle(text)
+	iziSection(text)
+	array blah := [hi, hola, blah]
+	iziList(unordered, blah)
+	iziPar(par_text)
+	string id := section 2
+	iziSection(id)
+	iziList(unordered, blah)
+	iziPar(par_text)
 	}

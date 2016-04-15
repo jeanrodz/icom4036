@@ -14,13 +14,13 @@ class Expression(str):
     grammar = [FloatLiteral,IntLiteral,StringLiteral]
     
 class ArrayExpression(str):
-    grammar = ArrayType, Identifier, ":=", ArrayLiteral, ";"
+    grammar = ArrayType, Identifier, ":=", ArrayLiteral
     
 class IntExpression(str):
-    grammar = IntType, Identifier, ":=",IntLiteral,";"
+    grammar = IntType, Identifier, ":=",IntLiteral
     
 class FloatExpression(str):
-    grammar = FloatType, Identifier, ":=",FloatLiteral,";"
+    grammar = FloatType, Identifier, ":=",FloatLiteral
     
 class StringExpression(str):
     grammar = StringType, Identifier, ":=", StringLiteral
@@ -28,6 +28,6 @@ class StringExpression(str):
 class Assignment(str):
     grammar = [ArrayExpression,IntExpression,FloatExpression,StringExpression]
   
-string = "array blah := ['hi', 'balhs'];"
-f = parse(string, ArrayExpression)
+string = "string var := Hola, como estas? Mucho gusto"
+f = parse(string, StringExpression)
 print(f)
