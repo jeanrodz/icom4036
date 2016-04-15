@@ -1,1 +1,3 @@
-import Interpreter
+from Interpreter import *
+
+main()

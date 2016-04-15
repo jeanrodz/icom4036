@@ -23,59 +23,6 @@ condition = False
 
 """
 /*****************************************************
-HTML Doc Generation
-/*****************************************************
-""" 
-
-def main():
-    doc.asis('<!DOCTYPE html>')
-    with tag('html'):       
-        with tag ('body'):
-            load_tokens('source.txt')
-            section_id = []
-
-            for i in range(0, len(token_stack)):
-                token = token_stack[i]
-                if token[0] == 'iziSection':
-                    section = [ ]
-                    id = token[1]
-                    print(id)
-                
-                    for j in range(i+1, (len(token_stack))):
-                        temp_token = token_stack[j]
-                        if(temp_token[0] != 'iziSection'):
-                            section.append(temp_token)
-                        else:
-                            break
-                    
-                    section_stack.append(section)
-                    section_id.append(id)
-                    print(section_id)
-
-            counter = 0
-            for j in range(0, len(section_stack)):
-                section_class = token_stack[j]
-            
-                if (section_id[counter] not in string_collection) : print("stop bullshitting!")
-                else :
-                    print(string_collection.get(section_id[counter]))
-                    with tag ('section', klass = string_collection.get(section_id[counter])):
-                        text('\n')
-                        for element in section_stack[j]:
-                        
-                            instruction_checker(element)                         
-                    counter = counter + 1
-            
-    result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
-    
-    outpath = "index.html"
-
-    with open (outpath, "wt") as outfile:
-        outfile.write(result)
-        outfile.close()   
-
-"""
-/*****************************************************
 Intermediate Code Functions and Analysis
 /*****************************************************
 """
@@ -203,3 +150,60 @@ def load_tokens(file):
              
             if (found_section) : token_stack.append(nl)
             else : instruction_checker(nl)
+
+"""
+/*****************************************************
+HTML Doc Generation
+/*****************************************************
+""" 
+
+def main():
+    doc.asis('<!DOCTYPE html>')
+    with tag('html'):       
+        with tag ('body'):
+            load_tokens('source.txt')
+            section_id = []
+
+            for i in range(0, len(token_stack)):
+                token = token_stack[i]
+                if token[0] == 'iziSection':
+                    section = [ ]
+                    id = token[1]
+                    print(id)
+                
+                    for j in range(i+1, (len(token_stack))):
+                        temp_token = token_stack[j]
+                        if(temp_token[0] != 'iziSection'):
+                            section.append(temp_token)
+                        else:
+                            break
+                    
+                    section_stack.append(section)
+                    section_id.append(id)
+                    print(section_id)
+
+            counter = 0
+            for j in range(0, len(section_stack)):
+                section_class = token_stack[j]
+            
+                if (section_id[counter] not in string_collection) : print("stop bullshitting!")
+                else :
+                    print(string_collection.get(section_id[counter]))
+                    with tag ('section', klass = string_collection.get(section_id[counter])):
+                        text('\n')
+                        for element in section_stack[j]:
+                        
+                            instruction_checker(element)                         
+                    counter = counter + 1
+            
+    result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
+    
+    outpath = "index.html"
+
+    with open (outpath, "wt") as outfile:
+        outfile.write(result)
+        outfile.close()   
+
+if __name__ == '__main__': 
+    main()
+    print("Main is working.")
