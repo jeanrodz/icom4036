@@ -73,6 +73,11 @@ def add_array(nl):
     
     array_collection[nl[1]] = array_items
     #print(array_collection)
+    
+def hyper_function(alias, url):
+    with tag('a'):
+        doc.attr(href = url)
+        text(alias)
 
 def add_string(nl):
     string_list = []
@@ -112,6 +117,8 @@ def instruction_checker(nl):
     elif ((nl[0] == 'iziPar') & (nl[1] in string_collection)): paragraph_function(nl)
     elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
+    elif ((nl[0] == 'iziHyper') & (nl[1] in string_collection) & (nl[2] in string_collection)): 
+            hyper_function(string_collection.get(nl[1]), string_collection.get(nl[2]))
 
 
 """

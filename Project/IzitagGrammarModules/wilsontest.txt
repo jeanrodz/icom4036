@@ -3,6 +3,9 @@ iziTag {
 	int foo := 5
 	float yas := 9.9
 	string par_text := Hola, como te llamas? Mucho gusto.
+	string link := http://abc.go.com/
+	string alias := more jews
+	iziHyper(alias, link)
 	iziTitle(text)
 	iziSection(text)
 	array blah := [hi, hola, blah]

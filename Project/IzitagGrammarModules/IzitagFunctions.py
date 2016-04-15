@@ -10,7 +10,7 @@ Module Description: Here we define how a datatype looks like in izitag
 /*****************************************************
 """
 class IziTagFunctionKeywords(Keyword):
-    grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"),K("iziList"))
+    grammar = Enum( K("iziTitle"),K("iziPar"), K("iziSection"),K("iziHeader"),K("iziTable"),K("iziImage"),K("iziList"), K("iziHyper"))
 
 class ListKeywords(Keyword):
     grammar = Enum( K("ordered"),K("unordered"))
@@ -42,12 +42,13 @@ class IziImage(str):
 class IziList(str):
     grammar = IziTagFunctionName,"(",IziTagListOrder,",",Identifier,")"
     
+class IziHyper(str):
+    grammar = IziTagFunctionName,"(",Identifier,",",Identifier,")"
+    
 class IziTagFunctions(str):
-    grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList]
+    grammar = [IziTitle,IziPar,IziSection,IziHeader,IziTable,IziImage,IziList,IziHyper]
     
     
-
-    
-
-
-
+string = "iziHyper(yourface, stuff)"
+f = parse(string, IziHyper)
+print(f)  
