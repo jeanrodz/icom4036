@@ -1,5 +1,10 @@
 ['string', 'text', "'lol'"]
 ['int', 'foo', '5']
+['int', 'height', '500']
+['int', 'width', '500']
+['string', 'path', 'http://media.mydogspace.com.s3.amazonaws.com/wp-content/uploads/2013/08/puppy-500x350.jpg']
+['iziImage', 'path', 'height', 'width']
+iziSection
 ['float', 'yas', '9.9']
 ['string', 'par_text', "'Hola, como te llamas? Mucho gusto'"]
 ['iziTitle', 'text']

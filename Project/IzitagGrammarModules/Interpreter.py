@@ -26,7 +26,7 @@ Intermediate Code Functions and Analysis
 """
 
 doc, tag, text = Doc().tagtext()
-            
+          
 def title_function(nl):
     with tag('head'):
         with tag ('title'):
@@ -45,7 +45,7 @@ def iziImage(source, height, width):
         if (width in int_collection): imgwidth = int_collection.get(width)
         else : imgwidth = float_collection.get(width)
     
-        print("<img src='" + source + "' height='" + imgheight + "'" + " width='" + imgwidth + "'>")
+        doc.stag('img', src = source, height = imgheight, width = imgwidth)
     
     else : print("S#!T")
     
@@ -141,40 +141,39 @@ def load_tokens(file):
             if (found_section) : token_stack.append(nl)
             else : instruction_checker(nl)
             
-load_tokens('source.txt')
+#load_tokens('source.txt')
 
 #print (token_stack)
-
-for i in range(0, len(token_stack)):
-    token = token_stack[i]
-    if token[0] == 'iziSection':
-        section = [ ]
-        for j in range(i+1, (len(token_stack))):
-            temp_token = token_stack[j]
-            if(temp_token[0] != 'iziSection'):
-                section.append(temp_token)
-            else:
-                break
-        section_stack.append(section)
-        
-#print(section_stack)
 
 """
 /*****************************************************
 HTML Doc Generation
 /*****************************************************
-"""               
+"""  
 
 doc.asis('<!DOCTYPE html>')
 with tag('html'):       
     with tag ('body'):
+        load_tokens('source.txt')
+
+        for i in range(0, len(token_stack)):
+            token = token_stack[i]
+            if token[0] == 'iziSection':
+                section = [ ]
+                for j in range(i+1, (len(token_stack))):
+                    temp_token = token_stack[j]
+                    if(temp_token[0] != 'iziSection'):
+                        section.append(temp_token)
+                    else:
+                        break
+                section_stack.append(section)
+
         for i in range(0, len(section_stack)):
             with tag ('section'):
                 text('\n')
                 for element in section_stack[i]:
                     print (element)
-                    instruction_checker(element)
-                    
+                    instruction_checker(element)                         
 
 result = indent(doc.getvalue(), indentation = '', newline = '\r\n')
     
