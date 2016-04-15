@@ -1,9 +1,10 @@
 class CSS_Class(Object):
-	def __init__(self, ID, tag, attributes):
-		self.ID = ID
-		self.attributes = attributes
+	def __init__(self, css_statement):
+		self.ID = css_statement[1]
+		self.tag = css_statement[2]
+		self.attributes = css_statement[3,len(css_statement)]
 
-	def generate_class():
+	def generate_css_class():
 		print(" .{} {").format(ID)
 		for item in attributes:
 			print("{} {").format(tag)
