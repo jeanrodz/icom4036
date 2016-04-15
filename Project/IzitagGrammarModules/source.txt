@@ -1,9 +1,8 @@
-iziSection
-['string', 'text', 'lol']
+['string', 'text', "'lol'"]
 ['int', 'foo', '5']
 ['float', 'yas', '9.9']
+['string', 'par_text', "'Hola, como te llamas? Mucho gusto'"]
 ['iziTitle', 'text']
-['array', 'blah', 'stuff', 'your', 'face']
-iziSection
+['array', 'blah', "['hi', 'hola', 'blah']"]
 ['iziList', 'unordered', 'blah']
-['iziTable', 'text', 'blah']
+['iziPar', 'par_text']

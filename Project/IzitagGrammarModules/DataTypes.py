@@ -8,19 +8,19 @@ Module Description: Here we define how a datatype looks like in izitag
 """
 
 class StringLiteral(str):
-     fulltString = "'", maybe_some(word),"'"
+     #fulltString = "'", maybe_some(word),"'"
      emptyString = "''"
-     grammar = [emptyString,fulltString]
-    
+     fullString = re.compile(r'(.*\S.*)')
+     grammar = [emptyString,fullString]
+     
 class IntLiteral(str):
      grammar = re.compile(r"\d+")
      
-    
 class FloatLiteral(str):
     grammar= re.compile(r'(\d+(.\d+)?)')
     
 class ArrayLiteral(str):
-    grammar = re.compile("\[(\'(\w+)'(?:,\'(\w+)')*)\]")
+    grammar = re.compile("(\[.*\])")
     
 class StringDataType(Keyword):
     grammar = Enum(  K("string"))
@@ -87,6 +87,6 @@ f = parse(stringToParse, DataType)
 print(f)
 """
 
-stringToParse = " 'Hola como estas' "
+stringToParse = " 'Hola, como estas?' "
 f = parse(stringToParse, StringLiteral)
 print (f)

@@ -22,7 +22,7 @@ class IziTagListOrder(str):
     grammar = ListKeywords
             
 class IziTitle(str):
-    grammar = IziTagFunctionName,"(",[Identifier,StringLiteral],")",";"
+    grammar = IziTagFunctionName,"(",[Identifier],")",";"
     
 class IziPar(str):
     grammar = IziTagFunctionName,"(", [Identifier], ")",";"

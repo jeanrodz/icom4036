@@ -72,15 +72,22 @@ def add_array(nl):
         array_items.append(nl[i])
     
     array_collection[nl[1]] = array_items
+    print(array_collection)
 
 def add_string(nl):
     string_list = []
-    for i in range(2, len(nl)): 
-        string_list.append(nl[i])
+    
+    if (len(nl) > 2) : 
+        string_list.append(nl[2])
+        for i in range(3, len(nl)):
+            string_list.append(', ')
+            string_list.append(nl[i])
+    
+    else : string_list.append(nl[i])
 
     temp_string = "".join(string_list)
+    temp_string.replace("\\", "")
     print(temp_string)
-    
     string_collection[nl[1]] = temp_string
     
 def table_function(nl):
@@ -102,7 +109,7 @@ def instruction_checker(nl):
     elif ((nl[0] == 'array') & (nl[1] not in array_collection)): add_array(nl)
     elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
     elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
-    elif ((nl[0] == 'iziParagraph') & (nl[1] in string_collection)): paragraph_function(nl)
+    elif ((nl[0] == 'iziPar') & (nl[1] in string_collection)): paragraph_function(nl)
     elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
 
@@ -127,14 +134,16 @@ def load_tokens(file):
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
+            nl = nl.replace("\"", "")
             nl = nl.split(", ")
+             
             
             if (found_section) : token_stack.append(nl)
             else : instruction_checker(nl)
             
 load_tokens('source.txt')
 
-print (token_stack)
+#print (token_stack)
 
 for i in range(0, len(token_stack)):
     token = token_stack[i]
@@ -148,7 +157,7 @@ for i in range(0, len(token_stack)):
                 break
         section_stack.append(section)
         
-print(section_stack)
+#print(section_stack)
 
 """
 /*****************************************************
