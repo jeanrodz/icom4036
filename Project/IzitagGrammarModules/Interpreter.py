@@ -3,6 +3,8 @@ from yattag import Doc
 from yattag import indent
 from pydoc import doc
 import ParseOutputGen
+#from test.support import temp_cwd
+from Hyperlink import *
 
 
 """
@@ -36,7 +38,8 @@ def title_function(nl):
     
 def paragraph_function(nl):  
     with tag('p'):
-        text(string_collection.get(nl[1]))
+        #text(string_collection.get(nl[1]))
+        doc.asis(string_collection.get(nl[1]))
     
 def iziImage(source, height, width):
     if ((height in int_collection) or (height in float_collection)) & ((width in int_collection) or (width in float_collection)):
@@ -54,25 +57,47 @@ def iziImage(source, height, width):
     
 def list_function(nl):
     list_items = array_collection.get(nl[2])  
-
+    print(list_items)
+    
     if (nl[1] == "ordered"):
         with tag('ol'): 
             for i in range(0, len(list_items)): 
                 with tag('li'):     
-                    text(list_items[i])
+                    #text(list_items[i])
+                    doc.asis(list_items[i])
                
     elif (nl[1] == "unordered"): 
         with tag('ul'):
             for i in range(0, len(list_items)): 
                 with tag('li'):
-                    text(list_items[i])
+                    #text(list_items[i])
+                    doc.asis(list_items[i])
             
     else : print("WHAT KIND OF LIST ARE YOU TRYING TO DO?!")
         
 def add_array(nl):
     array_items = []
+    jump = False
     for i in range(2, len(nl)):
-        array_items.append(nl[i])
+        if (jump == False):
+            if (nl[i].find("iziHyper(") >= 0):
+                temp_list = []
+                temp = ""
+                
+                temp_list.append(nl[i])
+                temp_list.append(", ")
+                temp_list.append(nl[i+1])
+                temp = temp.join(temp_list)
+                
+                result = hyper_checker(temp, string_collection)
+                array_items.append(result)
+                
+                jump = True
+            
+            else : array_items.append(nl[i])
+        
+        else :
+            jump = False
     
     array_collection[nl[1]] = array_items
     
@@ -95,19 +120,24 @@ def add_string(nl):
 
     temp_string = temp_string.join(string_list)
     
-    string_collection[nl[1]] = temp_string
+    result = hyper_checker(temp_string, string_collection)
+    string_collection[nl[1]] = result
+    
+    #string_collection[nl[1]] = temp_string
     
 def table_function(nl):
     with tag('table'):
         with tag('tr'):
             with tag('th'):
-                text(string_collection.get(nl[1]))
+                #text(string_collection.get(nl[1]))
+                doc.asis(string_collection.get(nl[1]))
                 for row_index in range(2, len(nl)):
                     with tag('tr'):
                         row = array_collection[nl[row_index]]
                         for item in row:
                             with tag('td'):
-                                text(item)
+                                #text(item)
+                                doc.asis(item)
 
 def instruction_checker(nl):
     if ((nl[0] == 'int') & (nl[1] not in int_collection)): int_collection[nl[1]] = nl[2]
@@ -117,7 +147,9 @@ def instruction_checker(nl):
     elif ((nl[0] == 'iziTitle') & (nl[1] in string_collection)): title_function(nl)
     elif ((nl[0] == 'iziImage') & (nl[1] in string_collection)): iziImage(string_collection.get(nl[1]), nl[2], nl[3])
     elif ((nl[0] == 'iziPar') & (nl[1] in string_collection)): paragraph_function(nl)
-    elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): list_function(nl) 
+    elif ((nl[0] == 'iziList') & (nl[2] in array_collection)): 
+        print ("list found")
+        list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
     elif ((nl[0] == 'iziHyper') & (nl[1] in string_collection) & (nl[2] in string_collection)): 
             hyper_function(string_collection.get(nl[1]), string_collection.get(nl[2]))
@@ -143,8 +175,11 @@ def load_tokens(file):
             nl = newline.replace("[","")
             nl = nl.replace("]","")
             nl = nl.replace("'","")
-            #nl = nl.replace("\\", "")
-            #nl = nl.replace("\"", "")
+            
+            #nl = nl.replace("&", "&amp;")
+            #nl = nl.replace("<", "&lt;")
+            #nl = nl.replace(">", "&gt;")
+
             nl = nl.split(", ")
             if (nl[0] == "iziSection") : found_section = True
              

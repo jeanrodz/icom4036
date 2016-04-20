@@ -14,7 +14,11 @@ iziTag {
 	iziHyper(alias, link)
 	string id_2 := section_2
 	iziSection(id_2)
-	array blah := [fluffy, happy, smart, hungry, loyal]
+	array blah := [fluffy, happy, iziHyper(alias, link), smart, hungry, loyal]
 	iziList(ordered, blah)
+	string par_text1 := Este es mi amigo Jean.
+	iziPar(par_text1)
+	string path1 := jean.jpg
+	iziImage(path1, height, width)
 	iziList(unordered, blah)
 	}
