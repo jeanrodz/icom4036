@@ -128,8 +128,8 @@ def add_string(nl):
 def table_function(nl):
     with tag('table'):
         with tag('tr'):
-            with tag('th'):
-                #text(string_collection.get(nl[1]))
+            with tag('th'): 
+                #text(string_collection.get(nl[1]))              
                 doc.asis(string_collection.get(nl[1]))
                 for row_index in range(2, len(nl)):
                     with tag('tr'):
@@ -152,7 +152,7 @@ def instruction_checker(nl):
         list_function(nl) 
     elif ((nl[0] == 'iziTable') & (nl[1] in string_collection)): table_function(nl)  
     elif ((nl[0] == 'iziHyper') & (nl[1] in string_collection) & (nl[2] in string_collection)): 
-            hyper_function(string_collection.get(nl[1]), string_collection.get(nl[2]))
+        hyper_function(string_collection.get(nl[1]), string_collection.get(nl[2]))
 
 
 """
@@ -194,7 +194,10 @@ HTML Doc Generation
 
 def main():
     doc.asis('<!DOCTYPE html>')
-    with tag('html'):       
+    with tag('html'): 
+        doc.asis('<style>')
+        text('table, th, td {border: 1px solid black;}')   
+        doc.asis('</style>')   
         with tag ('body'):
             load_tokens('source.txt')
             section_id = []
@@ -227,7 +230,7 @@ def main():
                     with tag ('section', klass = string_collection.get(section_id[counter])):
                         text('\n')
                         for element in section_stack[j]:
-                        
+                    
                             instruction_checker(element)                         
                     counter = counter + 1
             

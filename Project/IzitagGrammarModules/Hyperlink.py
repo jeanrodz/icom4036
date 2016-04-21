@@ -1,9 +1,9 @@
-from __future__ import unicode_literals, print_function
-from builtins import range
+#from __future__ import unicode_literals, print_function
+#from builtins import range
 import re
-from macpath import split
+#from macpath import split
 from pip._vendor.pyparsing import empty
-from lib2to3.fixer_util import String
+#from lib2to3.fixer_util import String
 
 def hyper_checker(string, string_collection):
     
