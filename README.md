@@ -9,6 +9,6 @@ The IziTag language was our project presented as a requisite for the ICOM 4036 P
 The IziTag Programming Langueage, is a programming language designed to generate HTML pages with simple IzizTag functions. The syntax of IziTag is based on the Python language and uses the PyPeg library to define the rules of the language. Some of the functions include  iziTitle which makes a HTML Title , iziPar that generates a HTML paragraph and many other functions. As a result, we will include a tutorial and video on building simple web pages with iziTag.
 
 
--  [IziTag Overview & Tutorial](https://docs.google.com/document/d/1Xdq0oQZiZwg-a6CX-YbZa_8rw6shChtR34dlO-WRY2E/edit)
--  [Introductory Video  ](https://www.youtube.com/watch?v=bdJGJCtv2BA&feature=youtu.be)
--  [IziTag  API & Documentation](https://docs.google.com/document/d/1Xdq0oQZiZwg-a6CX-YbZa_8rw6shChtR34dlO-WRY2E/edit)
+-  [IziTag Overview & Tutorial](https://docs.google.com/document/d/1Xdq0oQZiZwg-a6CX-YbZa_8rw6shChtR34dlO-WRY2E/edit?usp=sharing)
+-  [Introductory Video  ](https://drive.google.com/file/d/0ByXRUaa6FevzTXF2Z0xTUmdxYjg/view?usp=sharing)
+-  [IziTag  API & Documentation](https://docs.google.com/document/d/1qG4jX2kvLotcadTtl11t0Ne5v-9rf5L9gX1lS72TA8E/edit?usp=sharing)
